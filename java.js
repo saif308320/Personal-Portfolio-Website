@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
     }
   }
+
   const currentTheme = localStorage.getItem('theme') || 'dark';
   html.setAttribute('data-theme', currentTheme);
   updateThemeIcon(currentTheme);
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ===== UNIFIED CLICK HANDLER for internal links =====
+  // ===== UNIFIED CLICK HANDLER =====
   document.addEventListener('click', function (e) {
     const anchor = e.target.closest('a[href^="#"]');
     if (!anchor) return;
@@ -174,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', animStats);
   animStats();
 
-  // ===== PORTFOLIO SWIPER — coverflow =====
+  // ===== PORTFOLIO SWIPER =====
   if (document.querySelector('.swiper-portfolio')) {
     var portfolioSwiper = new Swiper('.swiper-portfolio', {
       effect: 'coverflow',
@@ -209,8 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== CONTACT FORM — Email via Formspree / Web3Forms =====
-  // NOTE: Replace YOUR_FORM_ID below with your Formspree or Web3Forms access key
+  // ===== CONTACT FORM =====
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
@@ -234,10 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.innerHTML  = '<span>Sending...</span>';
 
       try {
-        // ---- Web3Forms integration ----
-        // Get free key at https://web3forms.com
         const formData = new FormData();
-        formData.append('access_key', 'YOUR_WEB3FORMS_KEY_HERE'); // <-- replace this
+        formData.append('access_key', 'YOUR_WEB3FORMS_KEY_HERE');
         formData.append('name', nameVal);
         formData.append('email', emailVal);
         formData.append('message', msgVal);
@@ -264,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showFormMsg(msg, type, btn) {
-    // Remove existing message if any
     const old = document.querySelector('.form-msg-toast');
     if (old) old.remove();
 
@@ -273,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toast.style.cssText = `
       margin-top: 16px; padding: 14px 20px; border-radius: 12px; font-size: 0.9rem;
       font-weight: 600; text-align: center;
-      background: ${type === 'success' ? 'rgba(212,175,55,0.15)' : 'rgba(220,53,69,0.15)'};
+      background: ${type === 'success' ? 'rgba(212,175,55,0.12)' : 'rgba(220,53,69,0.12)'};
       border: 1px solid ${type === 'success' ? 'rgba(212,175,55,0.4)' : 'rgba(220,53,69,0.4)'};
       color: ${type === 'success' ? 'var(--accent)' : '#dc3545'};
     `;
