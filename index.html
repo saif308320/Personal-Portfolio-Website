@@ -10,6 +10,75 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ── NEW FORM FIELDS ── */
+    .input-group select {
+      width: 100%;
+      background: rgba(212,175,55,0.04);
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath fill='%23d4af37' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: pointer;
+    }
+    .input-group select:focus {
+      border-color: var(--accent);
+      background-color: rgba(212,175,55,0.06);
+      box-shadow: 0 0 20px rgba(212,175,55,0.2);
+      color: var(--text-white);
+    }
+    .input-group select option {
+      background-color: #1a1000;
+      color: #F5F5F5;
+    }
+    [data-theme="light"] .input-group select {
+      background-color: rgba(212,175,55,0.05);
+      color: var(--text-muted);
+    }
+    [data-theme="light"] .input-group select option {
+      background-color: #fffdf5;
+      color: #1a0f00;
+    }
+    .input-group select.filled {
+      color: var(--text-white);
+    }
+    [data-theme="light"] .input-group select.filled {
+      color: var(--text-white);
+    }
+
+    /* Success / Error message */
+    .form-message {
+      display: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .form-message.success {
+      display: block;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.4);
+      color: #4ade80;
+    }
+    .form-message.error {
+      display: block;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #f87171;
+    }
+  </style>
 </head>
 
 <body>
@@ -218,7 +287,7 @@
     </div>
   </section>
 
-  <!-- SERVICES — 4 CARDS ONLY -->
+  <!-- SERVICES -->
   <section class="services-flow-section" id="services">
     <div class="svg-path-container">
       <svg width="100%" height="100%" viewBox="0 0 200 1000" preserveAspectRatio="none">
@@ -232,7 +301,6 @@
         <p>"Helping businesses scale with precision. I provide end-to-end digital solutions — from high-converting sales funnels and complex automation to modern web development."</p>
       </div>
       <div class="flow-wrapper-new">
-
         <div class="flow-item-new" data-aos="fade-right">
           <div class="flow-line-number">1</div>
           <div class="flow-card-new" style="border-radius:60% 40% 30% 70%/60% 30% 70% 40%;">
@@ -244,7 +312,6 @@
             <p>Advanced funnels, CRM automation, and workflow optimization for maximum efficiency.</p>
           </div>
         </div>
-
         <div class="flow-item-new" data-aos="fade-left">
           <div class="flow-line-number">2</div>
           <div class="flow-card-new" style="border-radius:40% 60% 70% 30%/40% 70% 30% 60%;">
@@ -256,7 +323,6 @@
             <p>High-performance React and WordPress solutions with modern, clean architecture.</p>
           </div>
         </div>
-
         <div class="flow-item-new" data-aos="fade-right">
           <div class="flow-line-number">3</div>
           <div class="flow-card-new" style="border-radius:50% 50% 30% 70%/50% 30% 70% 50%;">
@@ -268,7 +334,6 @@
             <p>Modern, intuitive interfaces designed in Figma for optimal user experience.</p>
           </div>
         </div>
-
         <div class="flow-item-new" data-aos="fade-left">
           <div class="flow-line-number">4</div>
           <div class="flow-card-new" style="border-radius:70% 30% 50% 50%/30% 30% 70% 70%;">
@@ -280,7 +345,6 @@
             <p>Seamless workflows and API integrations that save time and boost productivity.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -314,26 +378,84 @@
             </div>
           </div>
         </div>
+
         <div class="contact-card" data-aos="fade-left">
-          <form class="form-grid" id="contactForm">
+          <!-- ✅ FORMSPREE ACTION — ID: mkgqzwdn -->
+          <form class="form-grid" id="contactForm"
+                action="https://formspree.io/f/mkgqzwdn"
+                method="POST">
+
+            <!-- Hidden fields for better email subject -->
+            <input type="hidden" name="_subject" value="🔥 New Project Inquiry — Saif Portfolio">
+            <input type="text" name="_gotcha" style="display:none">
+
+            <!-- Name -->
             <div class="input-group">
-              <input type="text" id="name" placeholder=" " required>
+              <input type="text" id="name" name="name" placeholder=" " required>
               <label for="name">Your Name</label>
             </div>
+
+            <!-- Email -->
             <div class="input-group">
-              <input type="email" id="email" placeholder=" " required>
+              <input type="email" id="email" name="email" placeholder=" " required>
               <label for="email">Your Email</label>
             </div>
+
+            <!-- WhatsApp / Phone -->
+            <div class="input-group">
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder=" ">
+              <label for="whatsapp">WhatsApp / Phone Number</label>
+            </div>
+
+            <!-- Project Type -->
+            <div class="input-group">
+              <select id="project_type" name="project_type" required onchange="this.classList.add('filled')">
+                <option value="" disabled selected>Select Project Type</option>
+                <option value="GHL Setup & Configuration">GHL Setup & Configuration</option>
+                <option value="GHL Automation / Workflows">GHL Automation / Workflows</option>
+                <option value="Sales Funnel / Landing Page">Sales Funnel / Landing Page</option>
+                <option value="Full Website">Full Website</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Budget Range -->
             <div class="input-group full-width">
-              <textarea id="message" placeholder=" " required></textarea>
+              <select id="budget" name="budget" required onchange="this.classList.add('filled')">
+                <option value="" disabled selected>Select Budget Range</option>
+                <option value="Under $200">Under $200</option>
+                <option value="$200 – $500">$200 – $500</option>
+                <option value="$500 – $1,000">$500 – $1,000</option>
+                <option value="$1,000 – $2,000">$1,000 – $2,000</option>
+                <option value="$2,000+">$2,000+</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div class="input-group full-width">
+              <textarea id="message" name="message" placeholder=" " required></textarea>
               <label for="message">Your Message</label>
             </div>
+
+            <!-- Submit Button -->
             <div class="full-width">
-              <button type="submit" class="btn-reveal btn-large" style="width:100%;">
+              <button type="submit" class="btn-reveal btn-large" id="submitBtn" style="width:100%;">
                 <span>SEND MESSAGE</span>
                 <i data-lucide="send" size="20"></i>
               </button>
             </div>
+
+            <!-- Success / Error Messages -->
+            <div class="full-width">
+              <div class="form-message success" id="successMsg">
+                ✅ Message sent! I'll get back to you within 24 hours.
+              </div>
+              <div class="form-message error" id="errorMsg">
+                ❌ Something went wrong. Please try again or email me directly.
+              </div>
+            </div>
+
           </form>
         </div>
       </div>
@@ -365,6 +487,51 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="java.js"></script>
+
+  <script>
+    // ── FORMSPREE AJAX SUBMIT ──
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Button loading state
+      submitBtn.innerHTML = '<span>SENDING...</span>';
+      submitBtn.disabled = true;
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          successMsg.classList.add('success');
+          successMsg.style.display = 'block';
+          form.reset();
+          // Reset select styles
+          document.querySelectorAll('.input-group select').forEach(s => s.classList.remove('filled'));
+        } else {
+          errorMsg.classList.add('error');
+          errorMsg.style.display = 'block';
+        }
+      } catch (err) {
+        errorMsg.classList.add('error');
+        errorMsg.style.display = 'block';
+      }
+
+      // Restore button
+      submitBtn.innerHTML = '<span>SEND MESSAGE</span><i data-lucide="send" size="20"></i>';
+      submitBtn.disabled = false;
+      lucide.createIcons();
+    });
+  </script>
 
 </body>
 </html>
