@@ -394,12 +394,8 @@
         </div>
 
         <div class="contact-card" data-aos="fade-left">
-          <form class="form-grid" id="contactForm"
-                action="https://formspree.io/f/mwvwroao"
-                method="POST">
-
-            <input type="hidden" name="_subject" value="🔥 New Project Inquiry — Saif Portfolio">
-            <input type="text" name="_gotcha" style="display:none">
+          <!-- ✅ NO action/method — handled by JS below -->
+          <form class="form-grid" id="contactForm">
 
             <div class="input-group">
               <input type="text" id="name" name="name" placeholder=" " required>
@@ -446,7 +442,7 @@
 
             <div class="full-width">
               <button type="submit" class="btn-reveal btn-large" id="submitBtn" style="width:100%;">
-                <span>SEND MESSAGE</span>
+                <span id="btnText">SEND MESSAGE</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
                   <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"></polygon>
                   <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"></polygon>
@@ -455,7 +451,6 @@
               </button>
             </div>
 
-            <!-- Messages — hidden by default, shown via JS -->
             <div class="full-width">
               <div class="form-message" id="successMsg">
                 ✅ Message sent! I'll get back to you within 24 hours.
@@ -498,30 +493,42 @@
   <script src="java.js"></script>
 
   <script>
-    // ── FORMSPREE AJAX SUBMIT ──
+    // ============================================
+    // ✅ RAILWAY BACKEND — Lead Automation
+    // ============================================
+    const BACKEND_URL = 'https://saif-lead-automation-production.up.railway.app';
+
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
     const successMsg = document.getElementById('successMsg');
     const errorMsg = document.getElementById('errorMsg');
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      submitBtn.querySelector('span').textContent = 'SENDING...';
+      // Loading state
+      btnText.textContent = 'SENDING...';
       submitBtn.disabled = true;
-
-      // Hide both messages first
       successMsg.className = 'form-message';
       errorMsg.className = 'form-message';
 
       try {
-        const response = await fetch(form.action, {
+        const response = await fetch(BACKEND_URL + '/api/contact', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('whatsapp').value.trim(),
+            service: document.getElementById('project_type').value + ' — Budget: ' + document.getElementById('budget').value,
+            message: document.getElementById('message').value.trim(),
+          })
         });
 
-        if (response.ok) {
+        const data = await response.json();
+
+        if (data.success) {
           successMsg.className = 'form-message show-success';
           form.reset();
           document.querySelectorAll('.input-group select').forEach(s => s.classList.remove('filled'));
@@ -532,7 +539,7 @@
         errorMsg.className = 'form-message show-error';
       }
 
-      submitBtn.querySelector('span').textContent = 'SEND MESSAGE';
+      btnText.textContent = 'SEND MESSAGE';
       submitBtn.disabled = false;
     });
   </script>
