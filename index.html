@@ -394,7 +394,6 @@
         </div>
 
         <div class="contact-card" data-aos="fade-left">
-          <!-- ✅ NO action/method — handled by JS below -->
           <form class="form-grid" id="contactForm">
 
             <div class="input-group">
@@ -493,9 +492,7 @@
   <script src="java.js"></script>
 
   <script>
-    // ============================================
-    // ✅ RAILWAY BACKEND — Lead Automation
-    // ============================================
+    // ✅ RAILWAY BACKEND — Single Form Handler
     const BACKEND_URL = 'https://saif-lead-automation-production.up.railway.app';
 
     const form = document.getElementById('contactForm');
@@ -507,23 +504,22 @@
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      // Loading state
       btnText.textContent = 'SENDING...';
       submitBtn.disabled = true;
       successMsg.className = 'form-message';
       errorMsg.className = 'form-message';
 
       try {
+        const formData = new FormData();
+        formData.append('name', document.getElementById('name').value.trim());
+        formData.append('email', document.getElementById('email').value.trim());
+        formData.append('phone', document.getElementById('whatsapp').value.trim());
+        formData.append('service', document.getElementById('project_type').value + ' — Budget: ' + document.getElementById('budget').value);
+        formData.append('message', document.getElementById('message').value.trim());
+
         const response = await fetch(BACKEND_URL + '/api/contact', {
-  method: 'POST',
-  headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('whatsapp').value.trim(),
-            service: document.getElementById('project_type').value + ' — Budget: ' + document.getElementById('budget').value,
-            message: document.getElementById('message').value.trim(),
-          })
+          method: 'POST',
+          body: formData,
         });
 
         const data = await response.json();
