@@ -515,8 +515,8 @@
 
       try {
         const response = await fetch(BACKEND_URL + '/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+  method: 'POST',
+  headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             name: document.getElementById('name').value.trim(),
             email: document.getElementById('email').value.trim(),
